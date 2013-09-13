@@ -42,6 +42,7 @@
 
 def form_lp(A,b,c,integer=False,max=False,canonical=True,x_list=[],b_list=[], dual=False):
     
+    (m,n) = (len(A),len(A[0]))
     if canonical:
         b_list=[1]*m
         x_list=[1]*n
@@ -51,7 +52,6 @@ def form_lp(A,b,c,integer=False,max=False,canonical=True,x_list=[],b_list=[], du
     else:
         lp = MixedIntegerLinearProgram()
     x = lp.new_variable()
-    (m,n) = (len(A),len(A[0]))
     if integer:
         for i in range(0,n):
             lp.set_integer(x[i])
