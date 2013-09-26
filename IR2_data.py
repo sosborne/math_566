@@ -7,10 +7,10 @@ window_sizes=[]*4
 pos=[0]*4
 
 # For all instances, there are n vertices, 0...n-1.
-# Use the values of r and s as the vertices for flow source \
-    and sink.
-# The list 'Edges' stores triples (i,j,c) where c is the capacity \
-    of the directed edge (i,j).
+# Use the values of r and s as the vertices for flow source
+#    and sink.
+# The list 'Edges' stores triples (i,j,c) where c is the capacity
+#    of the directed edge (i,j).
 
 # Instance I1
 n[0] =  8;
@@ -35,9 +35,6 @@ Edges[1] = [\
          (18,19,5),(19,20,10),(20,21,15),(21,22,25),(22,23,35)]
 
 # Instance I3
-# For this instance, there are n vertices, 0...n-1.
-# Use the values of r and s as the vertices for flow source and sink.
-# The list 'Edges' stores triples (i,j,c) where c is the capacity of the directed edge (i,j).
 n[2] =  100;
 r[2] =  79;
 s[2] =  50;
