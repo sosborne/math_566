@@ -1,10 +1,10 @@
 #Initialize data arrays
-n=[]*4
-r=[]*4
-s=[]*4
-Edges=[]*4
-window_sizes=[]*4
-pos=[0]*4
+n=[None]*4
+r=[None]*4
+s=[None]*4
+Edges=[None]*4
+window_sizes=[None]*4
+pos=[None]*4
 
 # For all instances, there are n vertices, 0...n-1.
 # Use the values of r and s as the vertices for flow source
