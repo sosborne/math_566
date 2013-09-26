@@ -9,7 +9,7 @@ def aux_mat(Flow,n):
     for edge in Flow:
         if Flow[edge][0]>Flow[edge][1]:
             A[edge[0],edge[1]]=1
-        elif Flow[edge][1] > 0:
+        if Flow[edge][1] > 0:
             A[edge[1],edge[0]]=1
     return list(A)
     
