@@ -28,3 +28,13 @@ s[key] =  7;
 window_sizes[key] = [6,6]
 Edges[key] = [(0,1,2),(0,6,3),(2,1,infinity),(3,1,infinity),(4,3,infinity),\
               (4,5,infinity),(4,6,infinity),(5,2,infinity),(5,7,4),(6,7,3)];
+
+# Problem 4a
+key = '4a'
+n[key] =  6;
+r[key] =  4;
+s[key] =  5;
+window_sizes[key] = [6,6]
+Edges[key] = [(0,1,1),(1,0,1),(1,2,1,),(1,3,1),(2,1,1),(2,3,1),(2,4,1),(3,1,1),\
+              (3,2,1),(3,5,1),(4,2,1),(4,5,1),(5,3,1),(5,4,1)];
+
