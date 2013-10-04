@@ -4,7 +4,6 @@ r={}
 s={}
 Edges={}
 window_sizes={}
-pos={}
 
 # For all instances, there are n vertices, 0...n-1.
 # Use the values of r and s as the vertices for flow source
