@@ -98,9 +98,11 @@ def hung_alg(W,min_match=False):
                 u = list(-vector(u))
                 v = list(-vector(v))
             matching_weight=0
+            matching = []
             for (x,y,discard) in M:
+                matching.append((x,y-n))
                 matching_weight+=W[x,y-n]
-            return M,u,v,matching_weight,sum(u)+sum(v)
+            return matching,u,v,matching_weight,sum(u)+sum(v)
         else:
             R = Q.intersection(X)
             T = Q.intersection(Y)
