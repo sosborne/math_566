@@ -80,8 +80,8 @@ def equal_subgraph(W,u,v):
                 A[i,j]=1
     return A
 
-def hung_alg(W,min=False):
-    if min:
+def hung_alg(W,min_match=False):
+    if min_match:
         W = -W
     (n,m)=W.dimensions();u=[];v=[]
     X=set(range(0,n))
@@ -93,7 +93,7 @@ def hung_alg(W,min=False):
     while True:
         M,Q=max_matching(A)
         if len(M)==n:
-            if min:
+            if min_match:
                 W = -W
                 u = list(-vector(u))
                 v = list(-vector(v))
