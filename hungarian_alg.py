@@ -90,7 +90,9 @@ def hung_alg(W,min_match=False):
         u.append(max(W[i]))
         v.append(0)
     A=equal_subgraph(W,u,v)
+    num_of_matches=0
     while True:
+        num_of_matches+=1
         M,Q=max_matching(A)
         if len(M)==n:
             if min_match:
@@ -104,6 +106,7 @@ def hung_alg(W,min_match=False):
                 matching_weight+=W[x,y-n]
             return matching,u,v,matching_weight,sum(u)+sum(v)
         else:
+            print num_of_matches
             R = Q.intersection(X)
             T = Q.intersection(Y)
             ep_list=[]
