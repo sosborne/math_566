@@ -1,32 +1,29 @@
 def aug_paths(A,M):
     (n,m)=A.dimensions()
-    G = BipartiteGraph(A.transpose())
     matched = []
-    for (u,v,discard) in M:
+    for (u,v) in M:
         matched.extend([u,v])
     S=set(range(0,n))
     X=set(range(0,n))
     Y=set(range(n,n+m))
     S.difference_update(set(matched))
-    T=set([])
-    p={}
+    T=set([]);p={}
     for x in X:
         p[x]=None
     for y in Y:
         p[y]=None
-    
     marked=[]
     while S.difference(set(marked))!= set([]):
         x = list(S.difference(set(marked)))[0]
         marked.append(x)
-        for y in G.neighbors(x):
-            if (x,y,None) not in M and (y,x,None) not in M:
+        for j in A[x].nonzero_positions():
+            y = j+n
+            if (x,y) not in M:
                 if y not in T:
                     T.update(set([y]))
                     p[y]=x
                     if y not in matched:
-                        path=[y]
-                        next=y
+                        path=[y];next=y
                         while p[next]!=None:
                             next=p[next]
                             path.append(next)
@@ -35,38 +32,50 @@ def aug_paths(A,M):
                     else:
                         for edge in M:
                             if y in edge:
-                                (small,large,discard)=edge
-                                if y==small:
-                                    p[large]=y
-                                    S.update(set([large]))
-                                else:
-                                    p[small]=y
-                                    S.update(set([small]))
-    X.difference_update(S)
-    X.update(T)
+                                xp = edge[0]
+                                p[xp]=y
+                                S.update(set([xp]))
+                                break
+    X.difference_update(S);X.update(T)
     return X
 
+def check_PM(W):
+    (n,m)=W.dimensions()
+    if n!=m:
+        return False
+    else:
+        A = Matrix(n,m)
+        for x in range(0,n):
+            for y in range(0,m):
+                if W[x,y]!=0:
+                    A[x,y]=1
+        if len(max_matching(A)[0]) != n:
+            return False
+        else:
+            return True
+
 def max_matching(A):
-    G = BipartiteGraph(A.transpose())
     (n,m) = A.dimensions()
     matched = [];M = []
+    break_out=False
     for x in range(0,n):
-        for y in G.neighbors(x):
-            if y not in matched:
-                M.append((x,y,None))
+        for y in range(0,m):
+            if A[x,y]==1 and y not in matched:
+                M.append((x,y+n))
                 matched.append(y)
+                break_out=True
                 break
+        if break_out:
+            break
     P = aug_paths(A,M)
     while type(P)!=type(set([])):
-        add=[]
-        sub=[]
+        add=[];sub=[]
         while len(P)!=0:
-            add.append((min([P[0],P[1]]),max([P[0],P[1]]),None))
+            add.append((P[0],P[1]))
             if len(P)>2:
-                sub.append((min([P[1],P[2]]),max([P[1],P[2]]),None))
+                sub.append((P[2],P[1]))
             P.pop(0);P.pop(0)
-        M=set(M)
-        M.update(set(add))
+        M=set(M);M.update(set(add))
         M.difference_update(set(sub))
         M=list(M)
         P = aug_paths(A,M)
@@ -87,19 +96,21 @@ def equal_subgraph(W,u,v):
                 A[i,j]=1
     return A
 
-def hung_alg(W,min_match=False):
+def hung_alg(W,min_match=False,error_catching=True):
     if min_match:
         W = -W
     (n,m)=W.dimensions();u=[];v=[]
+    if error_catching:
+        if n!=m or not check_PM(W):
+            return 'No perfect matching!'
     X=set(range(0,n))
     Y=set(range(n,n+m))
-    for i in range(0,n):
-        u.append(max(W[i]))
+    for x in range(0,n):
+        u.append(max(W[x]))
+    for y in range(0,m):
         v.append(0)
     A=equal_subgraph(W,u,v)
-    num_of_matches=0
     while True:
-        num_of_matches+=1
         M,Q=max_matching(A)
         if len(M)==n:
             if min_match:
@@ -108,12 +119,11 @@ def hung_alg(W,min_match=False):
                 v = list(-vector(v))
             matching_weight=0
             matching = []
-            for (x,y,discard) in M:
+            for (x,y) in M:
                 matching.append((x,y-n))
                 matching_weight+=W[x,y-n]
             return matching,u,v,matching_weight,sum(u)+sum(v)
         else:
-            print num_of_matches
             R = Q.intersection(X)
             T = Q.intersection(Y)
             ep_list=[]
