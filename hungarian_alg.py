@@ -48,7 +48,14 @@ def aug_paths(A,M):
 
 def max_matching(A):
     G = BipartiteGraph(A.transpose())
-    M = [G.edges()[0]]
+    (n,m) = A.dimensions()
+    matched = [];M = []
+    for x in range(0,n):
+        for y in G.neighbors(x):
+            if y not in matched:
+                M.append((x,y,None))
+                matched.append(y)
+                break
     P = aug_paths(A,M)
     while type(P)!=type(set([])):
         add=[]
