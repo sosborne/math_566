@@ -33,9 +33,9 @@
 #            x_list[i] = -1      => variable x[i] >= 0
 #            x_list[i] != -1,0,1 => variable x[i] free
 #        b_list - a list of integers that dictate the following:
-#            b_list[i] =  1      => constraint i >= 0
-#            b_list[i] =  0      => constraint i  = 0
-#            b_list[i] = -1      => constraint i <= 0
+#            b_list[i] =  1      => constraint i >= b[i]
+#            b_list[i] =  0      => constraint i  = b[i]
+#            b_list[i] = -1      => constraint i <= b[i]
 #            b_list[i] != -1,0,1 => constraint i free
 # dual is a Boolean. If true, returns both the primal LP and the 
 #    dual LP. If false, returns only the primal LP

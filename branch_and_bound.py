@@ -1,7 +1,23 @@
-URL='https://raw.github.com/sosborne/math_566/master/'
-files = ['osborne_lp.py']
-for f in files:
-    load(URL+f)
+########################################################################
+#
+# Copyright (C) 2013 Steven Osborne.
+#
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see http://www.gnu.org/licenses/.
+#######################################################################
+
+load('https://raw.github.com/sosborne/math_566/master/osborne_lp.py')
 
 def gen_leaves(A,b,b_list,lp_vars):
     a_dict={}
@@ -31,6 +47,20 @@ def check_integral(a_dict):
             inte=False
             break
     return inte
+
+# A is a list of lists of coefficients
+# b is a list of problem constraints
+# c is a list of objective coefficients
+# X_list - a list of integers that dictate the following:
+#   X_list[i] =  1      => variable x[i] >= 0
+#   X_list[i] =  0      => variable x[i]  = 0
+#   X_list[i] = -1      => variable x[i] >= 0
+#   X_list[i] != -1,0,1 => variable x[i] free
+# B_list - a list of integers that dictate the following:
+#   B_list[i] =  1      => constraint i >= b[i]
+#   B_list[i] =  0      => constraint i  = b[i]
+#   B_list[i] = -1      => constraint i <= b[i]
+#   B_list[i] != -1,0,1 => constraint i free
 
 def branch_and_bound(A,b,c,X_list,B_list):
     verts=set([0]);searched=set([])
