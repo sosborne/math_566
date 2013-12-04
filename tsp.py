@@ -9,7 +9,7 @@ def len_tour(H):
     else:
         for edge in H.edges():
             tsp_length+=edge[2]
-    return tsp_length
+    return real(tsp_length)
 
 def add_dem_verts(u,v,w):
     u0=u[0]; u1=u[1]; v0=v[0]; v1=v[1];
