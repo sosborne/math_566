@@ -1,5 +1,5 @@
 def dist(u,v):
-    return ((u[0]-v[0])^2 + (u[1]-v[1])^2)^(1/2)
+    return real(((u[0]-v[0])^2 + (u[1]-v[1])^2)^(1/2))
 
 def len_tour(H):
     tsp_length = 0
@@ -87,7 +87,6 @@ def farthest_insertion(grid):
     while len(remaining_verts)!=0:
         worst_pair = None
         worst_val = 0
-        #G.show(pos = pos_dict, vertex_size = 10, vertex_labels = False)
         for v in remaining_verts:
             best_add=Infinity
             pair_place=None
