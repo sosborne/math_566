@@ -1,5 +1,5 @@
 def dist(u,v):
-    return real(((u[0]-v[0])^2 + (u[1]-v[1])^2)^(1/2))
+    return real(((u[0]-v[0])^2 + (u[1]-v[1])^2)^(1/2)).n()
 
 def len_tour(H):
     tsp_length = 0
