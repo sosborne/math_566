@@ -91,7 +91,7 @@ def farthest_insertion(grid):
             best_add=Infinity
             pair_place=None
             for edge in G.edges():
-                add_dist=real(dist(edge[0],v)+dist(edge[1],v))
+                add_dist=dist(edge[0],v)+dist(edge[1],v)
                 if add_dist.n() < best_add.n():
                     pair_place = ((edge[0],v),(edge[1],v))
                     best_add=add_dist
