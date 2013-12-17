@@ -115,8 +115,10 @@ def max_flow(Edges,n,r,s):
     Flow = int_flow(Edges)
     A = aux_mat(Flow,n)
     cont,path = aug_path(A,r,s)
+    print 'Here!',path
     while cont:
         Flow=push_flow(Flow,path)
         A = aux_mat(Flow,n)
         cont,path = aug_path(A,r,s)
+        print 'Here!',path
     return Flow,flow_value(Flow,s),path,cut_value(Edges,path)
